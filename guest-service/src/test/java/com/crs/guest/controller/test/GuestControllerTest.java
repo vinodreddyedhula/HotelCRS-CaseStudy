@@ -46,7 +46,7 @@ public class GuestControllerTest {
 				+ "      \"addressLine1\": \"test\",\r\n" + "      \"addressLine2\": \"test\",\r\n"
 				+ "      \"pinCode\": \"test\"\r\n" + "    },\r\n" + "    \"status\": \"Active\"\r\n" + "  }";
 		mockMvc.perform(
-				MockMvcRequestBuilders.post("/api/v1/guest").contentType(MediaType.APPLICATION_JSON).content(reqJson))
+				MockMvcRequestBuilders.post("/api/v1/guests").contentType(MediaType.APPLICATION_JSON).content(reqJson))
 				.andExpect(response -> {
 					log.info(response.toString());
 				});
@@ -62,18 +62,18 @@ public class GuestControllerTest {
 				+ "      \"state\": \"test1\",\r\n" + "      \"district\": \"test\",\r\n"
 				+ "      \"addressLine1\": \"test\",\r\n" + "      \"addressLine2\": \"test\",\r\n"
 				+ "      \"pinCode\": \"test\"\r\n" + "    },\r\n" + "    \"status\": \"Active\"\r\n" + "  }";
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/guest/12345678901").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/guests/12345678901").contentType(MediaType.APPLICATION_JSON)
 				.content(reqJson)).andExpect(status().is(200));
 	}
 
 	@Test
 	public void testFetchGuest() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/guest/12345678901")).andExpect(status().is(200));
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/guests/12345678901")).andExpect(status().is(200));
 	}
 
 	@Test
 	public void testDeleteGuest() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/guest/12345678901")).andExpect(status().is(200));
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/guests/12345678901")).andExpect(status().is(200));
 	}
 
 }

@@ -13,20 +13,22 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AddressDTO implements Serializable{
 	
-	@NotEmpty(message="")	
+	
+	private static final long serialVersionUID = 5381183414577788126L;
+
+	@NotEmpty(message="City cannot be empty")	
 	private String city;
 	
-	@NotEmpty(message="")	
+	@NotEmpty(message="State cannot be empty")	
 	private String state;
 	
-	@NotEmpty(message="")	
+	@NotEmpty(message="District cannot be empty")	
 	private String district;
 	
-	@NotEmpty(message="")	
 	private String addressLine1;
 	private String addressLine2;
 	
-	@NotEmpty(message="")	
+	@NotEmpty(message="Pincode cannot be empty")	
 	private String pinCode;
 
 

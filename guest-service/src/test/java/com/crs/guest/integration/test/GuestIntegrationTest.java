@@ -34,7 +34,7 @@ public class GuestIntegrationTest {
 	@Test
 	public void testAddGuest() throws Exception {
 		GuestDTO guestDTO = prepareGuestDTO();
-		ResponseEntity<?> response = restTemplate.postForEntity("http://localhost:" + port + "/api/v1/guest", guestDTO,
+		ResponseEntity<?> response = restTemplate.postForEntity("http://localhost:" + port + "/api/v1/guests", guestDTO,
 				SuccessResponse.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
@@ -48,9 +48,9 @@ public class GuestIntegrationTest {
 	public void testUpdateGuest() throws Exception {
 		GuestDTO guestDTO = prepareGuestDTO();
 		guestDTO.setName("Aravind Reddy");
-		restTemplate.put("http://localhost:" + port + "/api/v1/guest/402849be7a194083017a19408ef50000", guestDTO);
+		restTemplate.put("http://localhost:" + port + "/api/v1/guests/402849be7a194083017a19408ef50000", guestDTO);
 		ResponseEntity<?> response = restTemplate.getForEntity(
-				"http://localhost:" + port + "/api/v1/guest/402849be7a194083017a19408ef50000", SuccessResponse.class);
+				"http://localhost:" + port + "/api/v1/guests/402849be7a194083017a19408ef50000", SuccessResponse.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 
@@ -62,7 +62,7 @@ public class GuestIntegrationTest {
 	@Test
 	public void testFetchGuest() throws Exception {
 		ResponseEntity<?> response = restTemplate.getForEntity(
-				"http://localhost:" + port + "/api/v1/guest/402849be7a194083017a19408ef50000", SuccessResponse.class);
+				"http://localhost:" + port + "/api/v1/guests/402849be7a194083017a19408ef50000", SuccessResponse.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 
@@ -73,7 +73,7 @@ public class GuestIntegrationTest {
 			"DELETE FROM GUEST;", "SET FOREIGN_KEY_CHECKS=1;"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 	@Test
 	public void testDeleteGuest() throws Exception {
-		restTemplate.delete("http://localhost:" + port + "/api/v1/guest/402849be7a194083017a19408ef50000");
+		restTemplate.delete("http://localhost:" + port + "/api/v1/guests/402849be7a194083017a19408ef50000");
 	}
 
 	private GuestDTO prepareGuestDTO() {

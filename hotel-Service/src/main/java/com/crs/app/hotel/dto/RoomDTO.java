@@ -4,10 +4,6 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.NotEmpty;
 
-import com.crs.app.hotel.enums.RoomType;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,13 +13,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RoomDTO {
 	
-	  @NotEmpty(message="")	
+	  @NotEmpty(message="RoomNo cannot be empty")	
 	  private String roomNo;
 	  
-	  @NotEmpty(message="")
+	  @NotEmpty(message="Room Type cannot be empty")
 	  private String roomType;
 	  
-	  @NotEmpty(message="")
+	  @NotEmpty(message="Room Price cannot be empty")
 	  private BigDecimal roomPrice;
 
 
