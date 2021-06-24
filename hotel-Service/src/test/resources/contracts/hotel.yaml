@@ -1,0 +1,282 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: 'urn:tos'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+host: 'localhost:8096'
+basePath: /
+tags:
+  - name: hotel-controller-impl
+    description: Hotel Controller Impl
+paths:
+  api/v1/hotels:
+    post:
+      tags:
+        - hotel-controller-impl
+      summary: Add Hotel Details
+      operationId: addHotelUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: hotelDto
+          description: hotelDto
+          required: true
+          schema:
+            $ref: '#/definitions/HotelDTO'
+      responses:
+        '200':
+          description: Successfully Created
+          schema:
+            $ref: '#/definitions/HotelAPIResponse'
+        '201':
+          description: Created
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: You are not authorized to view the resource
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Accessing the resource you were trying to reach is forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: The resource you were trying to reach is not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  'api/v1/hotels/{hotel-id}':
+    get:
+      tags:
+        - hotel-controller-impl
+      summary: Fetch Hotel Details
+      operationId: getHotelDetailsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: hotel-id
+          in: path
+          description: hotel-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully Updated
+          schema:
+            $ref: '#/definitions/HotelAPIResponse'
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: You are not authorized to view the resource
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Accessing the resource you were trying to reach is forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: The resource you were trying to reach is not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - hotel-controller-impl
+      summary: Update Hotel Details
+      operationId: updateHotelUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: hotel-id
+          in: path
+          description: hotel-id
+          required: true
+          type: string
+        - in: body
+          name: hotelDTO
+          description: hotelDTO
+          required: true
+          schema:
+            $ref: '#/definitions/HotelDTO'
+      responses:
+        '200':
+          description: Successfully Updated
+          schema:
+            $ref: '#/definitions/HotelAPIResponse'
+        '201':
+          description: Created
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: You are not authorized to view the resource
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Accessing the resource you were trying to reach is forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: The resource you were trying to reach is not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - hotel-controller-impl
+      summary: Delete Hotel Details
+      operationId: deleteHotelDetailsUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - name: hotel-id
+          in: path
+          description: hotel-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully Deleted
+          schema:
+            $ref: '#/definitions/HotelAPIResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: You are not authorized to view the resource
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Accessing the resource you were trying to reach is forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: The resource you were trying to reach is not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+definitions:
+  AddressDTO:
+    type: object
+    properties:
+      addressLine1:
+        type: string
+      addressLine2:
+        type: string
+      city:
+        type: string
+      district:
+        type: string
+      pinCode:
+        type: string
+      state:
+        type: string
+    title: AddressDTO
+  ErrorResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+    title: ErrorResponse
+  HotelAPIResponse:
+    type: object
+    properties:
+      response:
+        $ref: '#/definitions/HotelResponseDTO'
+      success:
+        type: boolean
+    title: HotelAPIResponse
+  HotelDTO:
+    type: object
+    required:
+      - roomsInfo
+    properties:
+      address:
+        $ref: '#/definitions/AddressDTO'
+      hotelName:
+        type: string
+      region:
+        type: string
+      roomsInfo:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/RoomDTO'
+      status:
+        type: string
+      timings:
+        type: string
+    title: HotelDTO
+  HotelResponseDTO:
+    type: object
+    properties:
+      address:
+        $ref: '#/definitions/AddressDTO'
+      hotelName:
+        type: string
+      key:
+        type: string
+      message:
+        type: string
+      region:
+        type: string
+      roomsInfo:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/RoomDTO'
+      status:
+        type: string
+      statusCode:
+        type: string
+      timings:
+        type: string
+    title: HotelResponseDTO
+  RoomDTO:
+    type: object
+    properties:
+      roomNo:
+        type: string
+      roomPrice:
+        type: number
+      roomType:
+        type: string
+    title: RoomDTO
+  SuccessResponse«HotelResponseDTO»:
+    type: object
+    properties:
+      response:
+        type: object
+      success:
+        type: boolean
+    title: SuccessResponse«HotelResponseDTO»

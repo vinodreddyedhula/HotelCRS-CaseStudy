@@ -2,8 +2,8 @@ package com.crs.app.hotel.dto;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class BaseRestApiResponse implements Serializable{
@@ -12,7 +12,10 @@ public class BaseRestApiResponse implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 4713646429378010919L;
+	
+	@ApiModelProperty(hidden=true)
 	private String message;
+	
 	private boolean success=true;
 	
 	public BaseRestApiResponse() {

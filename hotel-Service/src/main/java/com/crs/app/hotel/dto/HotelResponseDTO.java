@@ -3,6 +3,7 @@ package com.crs.app.hotel.dto;
 import java.util.Date;
 import java.util.Set;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +23,9 @@ public class HotelResponseDTO extends BaseResponse {
 	private AddressDTO address;
 	private String status;
 	private Set<RoomDTO> roomsInfo;
+	@ApiModelProperty(hidden=true)
 	private Date createdDate;
+	@ApiModelProperty(hidden=true)
 	private Date modifiedDate;
 
 }

@@ -91,6 +91,27 @@
 	      <groupId>org.springframework.cloud</groupId>
 	      <artifactId>spring-cloud-starter-config</artifactId>
 	    </dependency>
+	    	<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-contract-wiremock</artifactId>
+			<version>2.1.1.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-contract-stub-runner</artifactId>
+			<version>2.1.1.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -119,6 +140,23 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M1</version><!--$NO-MVN-MAN-VER$ -->
+				<configuration>
+					<forkCount>3</forkCount>
+					<reuseForks>true</reuseForks>
+					<argLine>-Xmx1024m</argLine>
+					<!-- <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine> -->
+					<includes>
+						<include>**/*Test*.java</include>
+					</includes>
+					<excludes>
+					   <exclude>**/*GuestBaseContractVerifierTest.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>15</source>
@@ -141,6 +179,22 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+						<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>2.2.4.RELEASE</version>
+				<extensions>true</extensions>
+				<configuration>
+					<baseClassForTests>com.crs.guest.contract.test.GuestBaseContractVerifierTest</baseClassForTests>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>blog.svenbayer</groupId>
+						<artifactId>spring-cloud-contract-swagger</artifactId>
+						<version>1.2.0.RELEASE</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

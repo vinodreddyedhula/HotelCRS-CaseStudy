@@ -1,0 +1,252 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: 'urn:tos'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+host: 'localhost:9002'
+basePath: /
+tags:
+  - name: guest-controller-impl
+    description: Guest Controller Impl
+paths:
+  api/v1/guests:
+    post:
+      tags:
+        - guest-controller-impl
+      summary: Add Guest Details
+      operationId: addUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: guestDTO
+          description: guestDTO
+          required: true
+          schema:
+            $ref: '#/definitions/GuestDTO'
+      responses:
+        '200':
+          description: Successfully Created
+          schema:
+            $ref: '#/definitions/GuestAPIResponse'
+        '201':
+          description: Created
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: You are not authorized to view the resource
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Accessing the resource you were trying to reach is forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: The resource you were trying to reach is not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  'api/v1/guests/{guest-id}':
+    get:
+      tags:
+        - guest-controller-impl
+      summary: Fetch Guest Details
+      operationId: getUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: guest-id
+          in: path
+          description: guest-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully Created
+          schema:
+            $ref: '#/definitions/GuestAPIResponse'
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: You are not authorized to view the resource
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Accessing the resource you were trying to reach is forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: The resource you were trying to reach is not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - guest-controller-impl
+      summary: Update Guest Details
+      operationId: updateUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: guest-id
+          in: path
+          description: guest-id
+          required: true
+          type: string
+        - in: body
+          name: guestDTO
+          description: guestDTO
+          required: true
+          schema:
+            $ref: '#/definitions/GuestDTO'
+      responses:
+        '200':
+          description: Successfully Created
+          schema:
+            $ref: '#/definitions/GuestAPIResponse'
+        '201':
+          description: Created
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: You are not authorized to view the resource
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Accessing the resource you were trying to reach is forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: The resource you were trying to reach is not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - guest-controller-impl
+      summary: Delete Guest Details
+      operationId: deleteUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - name: guest-id
+          in: path
+          description: guest-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully Deleted
+          schema:
+            $ref: '#/definitions/GuestAPIResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: You are not authorized to view the resource
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Accessing the resource you were trying to reach is forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: The resource you were trying to reach is not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Internal validation error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+definitions:
+  AddressDTO:
+    type: object
+    properties:
+      addressLine1:
+        type: string
+      addressLine2:
+        type: string
+      city:
+        type: string
+      district:
+        type: string
+      id:
+        type: string
+      pinCode:
+        type: string
+      state:
+        type: string
+    title: AddressDTO
+  ErrorResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      success:
+        type: boolean
+    title: ErrorResponse
+  GuestAPIResponse:
+    type: object
+    properties:
+      response:
+        $ref: '#/definitions/GuestDTO'
+      success:
+        type: boolean
+    title: GuestAPIResponse
+  GuestDTO:
+    type: object
+    required:
+      - name
+    properties:
+      address:
+        $ref: '#/definitions/AddressDTO'
+      documentId:
+        type: string
+      documentType:
+        type: string
+      emailId:
+        type: string
+      id:
+        type: string
+      mobileNumber:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+    title: GuestDTO
+  SuccessResponse«GuestDTO»:
+    type: object
+    properties:
+      response:
+        type: object
+      success:
+        type: boolean
+    title: SuccessResponse«GuestDTO»
