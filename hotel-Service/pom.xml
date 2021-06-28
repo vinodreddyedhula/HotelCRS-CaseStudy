@@ -116,6 +116,15 @@
 			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 			<version>3.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -126,7 +135,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-				<dependency>
+			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-openfeign</artifactId>
 				<version>3.0.3</version>
@@ -182,7 +191,7 @@
 						<include>**/*Test*.java</include>
 					</includes>
 					<excludes>
-					   <exclude>**/*GlobalBaseContractTest.java</exclude>
+						<exclude>**/*GlobalBaseContractTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

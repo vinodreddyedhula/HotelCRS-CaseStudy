@@ -4,6 +4,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.crs.app.hotel.assembler.ModelMapperConverter;
@@ -24,6 +26,13 @@ public class HotelApplicationServiceImpl implements HotelApplicationService{
 	@Qualifier("hotelDomainService")
 	private HotelDomainService hotelDomainService;
 	
+	  @Autowired
+	  public KafkaTemplate<String,HotelResponseDTO> ktemplate;
+	  
+	  
+	 @Value( "${kafka.topic.name}")
+	  private String topic;
+	
 	/**
 	 * This method is used to add the Hotel Details according to Region/Country and
 	 * respective room details and its status.
@@ -36,6 +45,7 @@ public class HotelApplicationServiceImpl implements HotelApplicationService{
 		Hotel hotelDetails=hotelAssembler.toDomainObject(hotelDTO);
 		hotelDomainService.addHotelDetails(hotelDetails);
 		HotelResponseDTO responseDTO=hotelAssembler.fromDomainObject(hotelDetails);
+		ktemplate.send(topic, responseDTO);
 		return responseDTO;
 	}
 

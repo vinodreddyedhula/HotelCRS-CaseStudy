@@ -10,7 +10,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @ApiIgnore
 @RequestMapping(value="/api/v1/hotels/")
-@FeignClient(name="hotel-service-feignclient",url="${hotel.url}")
+@FeignClient(name="hotel-Service",url="${hotel.url}")
 public interface HotelFeignClient {
 	
 	@GetMapping(value="{hotel-id}")

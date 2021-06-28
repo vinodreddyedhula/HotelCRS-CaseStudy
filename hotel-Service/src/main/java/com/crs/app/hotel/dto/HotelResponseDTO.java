@@ -27,5 +27,11 @@ public class HotelResponseDTO extends BaseResponse {
 	private Date createdDate;
 	@ApiModelProperty(hidden=true)
 	private Date modifiedDate;
+	@Override
+	public String toString() {
+		return "HotelResponseDTO [key=" + key + ", hotelName=" + hotelName + ", region=" + region + ", timings="
+				+ timings + ", address=" + address + ", status=" + status + ", roomsInfo=" + roomsInfo
+				+ ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate + "]";
+	}
 
 }
