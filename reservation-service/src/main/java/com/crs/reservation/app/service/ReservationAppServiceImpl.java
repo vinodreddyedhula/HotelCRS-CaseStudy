@@ -17,7 +17,7 @@ import com.crs.reservation.app.dto.RoomsDTO;
 import com.crs.reservation.app.interfaces.ReservationAppService;
 import com.crs.reservation.app.mapper.ModelMapperConverter;
 import com.crs.reservation.domain.entities.HotelReservationDetails;
-import com.crs.reservation.domain.repository.IHotelReservationRepository;
+import com.crs.reservation.domain.repository.HotelReservationRepository;
 import com.crs.reservation.feignclient.GlobalFeignClientService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ReservationAppServiceImpl implements ReservationAppService {
 
 	@Autowired
-	private IHotelReservationRepository reservationRepository;
+	private HotelReservationRepository reservationRepository;
 
 	@Autowired
 	@Qualifier("paymentHelperService")

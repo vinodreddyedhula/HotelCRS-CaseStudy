@@ -11,11 +11,13 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name="EPM_HOTEL_RESERVATION")
 public class HotelReservationDetails implements Serializable{
 	
@@ -23,8 +25,11 @@ public class HotelReservationDetails implements Serializable{
 
 	  @Id
 	  @Column(name="RESERVATION_ID")
-	  @GeneratedValue(generator="system-uuid")
-	  @GenericGenerator(name="system-uuid",strategy="uuid")
+		/*
+		 * @GeneratedValue(generator="system-uuid")
+		 * 
+		 * @GenericGenerator(name="system-uuid",strategy="uuid")
+		 */
 	  private String reservationId;
 	  
 	  @Column(name="HOTEL_NAME")

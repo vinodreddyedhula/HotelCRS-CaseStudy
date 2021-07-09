@@ -2,6 +2,7 @@ package com.crs.reservation.feignclient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.crs.reservation.app.dto.CommonRestAPIHelper;
@@ -27,6 +28,7 @@ public class GlobalFeignClientService {
 		ResponseEntity<?> hotelDetails=hotelFeignClient.getHotelDetails(hotelId);
 		return (HotelResponseDTO) CommonRestAPIHelper.getResponse(hotelDetails,HotelResponseDTO.class);
 	}
+	
 	
 	@CircuitBreaker(name="guest-service",fallbackMethod="guestservicefallback")
 	public GuestDTO  getGuestDetails(String guestId) {

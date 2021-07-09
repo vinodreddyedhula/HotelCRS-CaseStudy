@@ -11,13 +11,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
 @EnableFeignClients
 @EnableSwagger2
 @EnableEurekaClient
 @SpringBootApplication(scanBasePackages = { "com.crs.*" })
 @EnableJpaRepositories("com.crs.reservation.domain.repository")
-@EntityScan("com.crs.reservation.domain.entities")
+@EntityScan({ "org.axonframework.eventsourcing.eventstore.jpa","org.axonframework.modelling.saga.repository.jpa", "org.axonframework.eventhandling.saga.repository.jpa",
+		"org.axonframework.eventhandling.tokenstore.jpa", "com.crs.reservation.domain.entities" })
 public class ReservationServiceApplication {
 
 	public static void main(String[] args) {
@@ -26,6 +26,6 @@ public class ReservationServiceApplication {
 
 	@Bean
 	public ModelMapper modelMapper() {
-	    return new ModelMapper();
+		return new ModelMapper();
 	}
 }
